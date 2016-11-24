@@ -1,0 +1,31 @@
+
+<html>
+	<head>
+	    <title>Manage Content</title>
+	    <link rel="stylesheet" href="/static/css/bootstrap.css" rel="stylesheet">
+	    <link rel="stylesheet" href="/static/css/bootstrap-responsive.css" rel="stylesheet">
+
+	    <script type='text/javascript' src="{{url_for('static',filename='js/jquery.js')}}"></script>
+	    <script type='text/javascript' src="{{url_for('static',filename='js/jquery.validate.js')}}"></script>
+	    <script type='text/javascript' src="{{url_for('static',filename='js/jquery-ui-1.10.3.custom.js')}}"></script>
+	    <script type='text/javascript' src="{{url_for('static',filename='js/jquery-ui.js')}}"></script>
+	    <script type='text/javascript' src="{{url_for('static',filename='js/bootstrap.js')}}"></script>
+	    <script type='text/javascript' src="{{url_for('static',filename='js/bootstrap-dropdown.js')}}"></script>
+	</head>
+	<body>
+    	<h2 style="text-align:center;">STUDENT DETAILS</h2>
+        <span style="color:#c62f2f">{{"<"}}<i>{{"Student Details"}}</i>{{">"}}<br/></span>
+    	{% for i in data %}
+            &emsp;<span style="color:#c62f2f">{{"<"}}<i>{{"Student"}}</i>{{">"}}<br/></span>
+            {% for k,v in i.iteritems(): %}
+                &emsp;&emsp;<span style="color:maroon">{{"<"}}<i>{{k}}</i>{{">"}}</span>
+                    <b>{{v}}</b>
+                <i><span style="color:maroon">{{"</"}}{{k}}{{">"}}</i></span>
+                <br/>
+            {% endfor %}
+            &emsp;<span style="color:#c62f2f">{{"</"}}<i>{{"Student"}}</i>{{">"}}<br/></span>
+        {% endfor %}
+        <span style="color:#c62f2f">{{"</"}}<i>{{"Student Details"}}</i>{{">"}}<br/></span>
+	</body>
+</html>
+

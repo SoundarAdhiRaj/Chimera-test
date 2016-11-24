@@ -1,0 +1,55 @@
+<html>
+<!doctype html>
+<head>
+<title>Add Images</title>
+<link href="/static/css/bootstrap.css" rel="stylesheet">
+<link href="/static/css/bootstrap-responsive.css" rel="stylesheet">
+  <script src="/static/js/jquery-1.8.3.js"></script>
+  <script src="/static/js/jquery.validate.js"></script>
+  <script src="/static/js/jquery-ui.js"></script>
+  <script src="/static/js/jquery.iframe-transport.js"></script>
+  <script src="/static/js/jquery.fileupload.js"></script>  
+  <script src="/static/js/jquery.tmpl.min.js"></script>
+  <script src="/static/js/fileupload.js"></script>
+
+</head>
+<body>
+
+<div style="height:35px; width:100%;"></div>
+  <div id="fileupload" data-itemid="{{item_id}}">
+    <form id="imgdiv" enctype="multipart/form-data" method="POST" >
+      <div id = "imgdiv" class="fileupload-buttonbar profile_upload" style="width:102.33%;">
+        <div class="fileinput-button " id="choose_file_btn" rel="tooltip" title="Click to update image">
+          <input id="choose_files" type="file" name="file" size=60 style=" top: -26px;left: -9px;width:272px;" required/>
+          <button type="submit" class="btn btn-primary start" id="start_uploads" >
+            <i class="icon-upload icon-white"></i> Upload All
+          </button>
+        </div>
+      </div>
+      <div id="file_error" style="display:none;color:red;">Please select a Image</div>  
+    </form>
+    <div class="fileupload-content">
+      <table id="upload_files" class="table">
+      <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"/>
+      </table>
+    </div>
+  </div>
+  <br class="clear">
+  <button value="" data-item_id="{{item_id}}" id="redirect"><a href="/video_upload/{{item_id}}">Next Page</a></button>
+  
+  
+  <script id="template-upload" type="text/x-tmpl">
+    <tr class="template-upload" id="files_list">
+      <td class="preview" style="width:50px;"><span class="fade"></span></td>
+      <td class="name" style="width:400px;word-break:break-all;">${name}(${sizef})</td>
+      <td class="start" style="width:125px;">
+        <button class="btn btn-primary"><i class="icon-upload icon-white"></i>Upload</button>
+        <div class="progress progress-striped active" style="height:15px;width:120px;display:none;"><div class="bar" style="width:100%;"></div></div>
+      <div class="upload_status" style="color:#468847;display:none;font-size:14px;">Uploaded</div>
+      </td>
+      <td class="cancel" style="width:100px;"><button class="btn btn-warning"><i class="icon-ban-circle icon-white"></i>Cancel</button></td>
+    </tr>
+  </script>
+</body>
+</html>
+

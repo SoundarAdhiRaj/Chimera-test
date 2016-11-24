@@ -1,0 +1,86 @@
+
+<html>
+	<head>
+	    <title>Manage Content</title>
+	    <link rel="stylesheet" href="/static/css/bootstrap.css" rel="stylesheet">
+	    <link rel="stylesheet" href="/static/css/bootstrap-responsive.css" rel="stylesheet">
+	    <link rel="stylesheet" href="/static/css/smoke.css">
+
+	    <script type='text/javascript' src="{{url_for('static',filename='js/underscore.js')}}"></script>
+	    <script type='text/javascript' src="{{url_for('static',filename='js/jquery.js')}}"></script>
+	    <script type='text/javascript' src="{{url_for('static',filename='js/jquery.validate.js')}}"></script>
+	    <script type='text/javascript' src="{{url_for('static',filename='js/jquery-ui-1.10.3.custom.js')}}"></script>
+	    <script type='text/javascript' src="{{url_for('static',filename='js/jquery-ui.js')}}"></script>
+	    <script type='text/javascript' src="{{url_for('static',filename='js/additional-methods.js')}}"></script>
+	    <script type='text/javascript' src="{{url_for('static',filename='js/bootstrap.js')}}"></script>
+	    <script type='text/javascript' src="{{url_for('static',filename='js/bootstrap-dropdown.js')}}"></script>
+	    <script type="text/javascript" src="{{url_for('static',filename='js/custom_paginator.js')}}"></script>
+	    <!--<script type="text/javascript" src="{{url_for('static',filename='js/smoke.min.js')}}" ></script>-->
+	</head>
+	<body>
+		<div class="container" style="margin-bottom:100px">
+    		<h2 style="text-align:center;">Exhibit Management</h2>
+    		<div class="row-fluid"><button id="add_form" class="btn btn-info" title="Add"><a href="/set_exhibit"> Add</a> </button></div>
+    		<div class="row-fluid"><button id="download_item" class="btn btn-info" title="download_item"><a href="/download_video"> Download videos</a> </button></div>
+    		<div class="row-fluid"><button id="download_item" class="btn btn-info" title="download_item"><a href="/download_image"> Download Images</a> </button></div>
+    		<hr>
+  			<div class="row-fluid" style="margin-top:20px;">
+			    <table id = "exhibit_table"  class="table table-striped">
+			      	<thead style="text-transform:capitalize;-webkit-text-transform:capitalize;cursor:pointer;">
+				      	<tr>
+				          	<th><a class="header_link"  data-sortby="title">Title<i class="icon-chevron-down icon-white"></i></a></th>
+				          	<th><a class="header_link"  data-sortby="description">Description<i class="icon-chevron-down icon-white"></i></a></th>
+				        </tr>
+			      	</thead>
+			      	<tbody class="threads_container comments_container">
+			      	{%if exhibit%}
+			      	{%for ex in exhibit%}
+			        	<tr>
+						  	<td style="width:150px;" >{{ex['title']}}</td>
+						  	<td style="width:150px;" >{{ex['description']}}</td>
+						  	<td style="width:150px;text-align:center;"><button><a href="/manage_exhibit/{{ex['id']}}">display</a></button></td>
+						  	<td style="width:150px;text-align:center;"><button class="delete_exhibit" data-id="{{ex['id']}}">delete</button></td>
+						</tr>
+					{%endfor%}
+					{%endif%}
+			      	</tbody>
+			    </table>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+		$('.delete_exhibit').bind('click',function(e){
+			e.preventDefault();
+			var that = $(this);
+			var ex_id  = that.data("id");
+			console.log('88888888888888888888888888888888');
+			console.log(ex_id);
+			url = '/api/delete_item';
+			params = JSON.stringify({"item_id":ex_id})
+			console.log(url,params);
+			$.post(url,params).then(function(res){
+				var res = JSON.parse(res);
+				if(res.success){
+					that.closest('tr').remove();
+				}
+				else{
+					alert("Failed to delete.")
+				}
+			});
+		});
+		</script>
+
+		<!--<script type="text/javascript">
+		$(document).ready(function(){
+			$(".delete_exhibit").onClick(function(){
+			var that = $(this);
+			var ex_id = that.data("id")
+			url
+
+			})
+		})
+		</script>-->
+		
+	</body>
+</html>
+
